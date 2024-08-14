@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Library</title>
+</head>
+
+<body>
+  <!-- Using the bootstrap flask module to style a bit -->
+  {% extends "bootstrap/base.html" %}
+  {% block content %}
+  <h1>My Library</h1>
+  <!-- If the book is empty below p tag will be diplayed in the body of the code. -->
+  {% if books == []: %}
+  <p>Library is Empty</p>
+  {% endif %}
+  <ul>
+    <!-- Iterating through the inputed data and displaying them as on linear series as title--author--rating -->
+    {% for data in books: %}
+    <!-- Using the url route of the delete function as anchor tag to delete user  choice id   -->
+    <!-- Using the url route of the edit fucntion as anchor tag to edit the user choice id rating -->
+    <li><a href="{{url_for('delete',id=data.id)}}">Delete</a> {{data.title}} - {{data.author}} - {{data.rating}} <a
+        href="{{url_for('edit', id=data.id )}}">Edit Rating</a></li>
+    {% endfor %}
+  </ul>
+  <!-- This url leads to the add route as a anchor tag Add New Book -->
+  <a href="{{url_for('add')}}">Add New Book</a>
+  {% endblock %}
+</body>
+
+</html>
